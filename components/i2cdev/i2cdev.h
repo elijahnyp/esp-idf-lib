@@ -190,6 +190,22 @@ esp_err_t i2c_dev_read_reg(const i2c_dev_t *dev, uint8_t reg,
 esp_err_t i2c_dev_write_reg(const i2c_dev_t *dev, uint8_t reg,
         const void *out_data, size_t out_size);
 
+/**
+ * @brief lock underlying port to allow another library access
+ * 
+ * @param port i2c_port_t number to lock
+ * @return ESP_OK on success
+ */
+esp_err_t i2c_dev_lock_port(i2c_port_t port);
+
+/**
+ * @brief unlock underlying port to allow another library access
+ * 
+ * @param port i2c_port_t number to lock
+ * @return ESP_OK on success
+ */
+esp_err_t i2c_dev_unlock_port(i2c_port_t port);
+
 #define I2C_DEV_TAKE_MUTEX(dev) do { \
         esp_err_t __ = i2c_dev_take_mutex(dev); \
         if (__ != ESP_OK) return __;\

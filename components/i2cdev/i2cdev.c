@@ -70,6 +70,16 @@ static i2c_port_state_t states[I2C_NUM_MAX];
         } while (0)
 #endif
 
+esp_err_t i2c_dev_lock_port(i2c_port_t port){
+    SEMAPHORE_TAKE(port);
+    return ESP_OK;
+}
+
+esp_err_t i2c_dev_unlock_port(i2c_port_t port){
+    SEMAPHORE_GIVE(port);
+    return ESP_OK;
+}
+
 esp_err_t i2cdev_init()
 {
     memset(states, 0, sizeof(states));
