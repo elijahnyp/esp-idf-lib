@@ -43,6 +43,7 @@
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <esp_log.h>
+#include <ets_sys.h>
 #include <esp_idf_lib_helpers.h>
 #include "scd30.h"
 
