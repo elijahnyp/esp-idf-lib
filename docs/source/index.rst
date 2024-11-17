@@ -132,6 +132,7 @@ Pressure sensors
    groups/bme680
    groups/dps310
    groups/ms5611
+   groups/qmp6988
 
 Air quality/Gas sensors
 =======================
@@ -251,6 +252,8 @@ Other
    groups/tca9548
    groups/ds3502
    groups/wiegand
+   groups/impulse_sensor
+   groups/tps63101x
 
 
 ===========

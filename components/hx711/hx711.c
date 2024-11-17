@@ -48,6 +48,10 @@
 static portMUX_TYPE mux = portMUX_INITIALIZER_UNLOCKED;
 #endif
 
+#ifndef BIT64
+#define BIT64 BIT
+#endif
+
 static uint32_t read_raw(gpio_num_t dout, gpio_num_t pd_sck, hx711_gain_t gain)
 {
 #if HELPER_TARGET_IS_ESP32
@@ -91,8 +95,18 @@ esp_err_t hx711_init(hx711_t *dev)
 {
     CHECK_ARG(dev);
 
-    CHECK(gpio_set_direction(dev->dout, GPIO_MODE_INPUT));
-    CHECK(gpio_set_direction(dev->pd_sck, GPIO_MODE_OUTPUT));
+    gpio_config_t conf = {
+        .pin_bit_mask = BIT64(dev->dout),
+        .mode = GPIO_MODE_INPUT,
+        .pull_up_en = 0,
+        .pull_down_en = 0,
+        .intr_type = GPIO_INTR_DISABLE,
+    };
+    CHECK(gpio_config(&conf));
+
+    conf.pin_bit_mask = BIT64(dev->pd_sck);
+    conf.mode = GPIO_MODE_OUTPUT;
+    CHECK(gpio_config(&conf));
 
     CHECK(hx711_power_down(dev, false));
 
