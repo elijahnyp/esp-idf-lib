@@ -7,5 +7,5 @@ endif()
 idf_component_register(
     SRCS wiegand.c
     INCLUDE_DIRS .
-    REQUIRES ${req}
+    REQUIRES ${req} esp_timer
 )

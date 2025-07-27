@@ -121,7 +121,7 @@ static void wait_conversion(ms5611_t *dev)
         case MS5611_OSR_2048: us = 4100; break; // 4.1ms
         case MS5611_OSR_4096: us = 8220; break; // 8.22ms
     }
-    ets_delay_us(us);
+    esp_rom_delay_us(us);
 }
 
 static inline esp_err_t get_raw_temperature(ms5611_t *dev, uint32_t *result)

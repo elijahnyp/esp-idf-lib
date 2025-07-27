@@ -60,19 +60,19 @@ static uint32_t read_raw(gpio_num_t dout, gpio_num_t pd_sck, hx711_gain_t gain)
     for (size_t i = 0; i < 24; i++)
     {
         gpio_set_level(pd_sck, 1);
-        ets_delay_us(1);
+        esp_rom_delay_us(1);
         data |= gpio_get_level(dout) << (23 - i);
         gpio_set_level(pd_sck, 0);
-        ets_delay_us(1);
+        esp_rom_delay_us(1);
     }
 
     // config gain + channel for next read
     for (size_t i = 0; i <= gain; i++)
     {
         gpio_set_level(pd_sck, 1);
-        ets_delay_us(1);
+        esp_rom_delay_us(1);
         gpio_set_level(pd_sck, 0);
-        ets_delay_us(1);
+        esp_rom_delay_us(1);
     }
 
 #if HELPER_TARGET_IS_ESP32

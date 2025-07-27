@@ -91,7 +91,7 @@ static uint8_t dec2bcd(uint8_t val)
 inline static esp_err_t chip_enable(ds1302_t *dev)
 {
     CHECK(gpio_set_level(dev->ce_pin, 1));
-    ets_delay_us(4);
+    esp_rom_delay_us(4);
     return ESP_OK;
 }
 
@@ -110,9 +110,9 @@ inline static esp_err_t prepare(ds1302_t *dev, gpio_mode_t mode)
 inline static esp_err_t toggle_clock(ds1302_t *dev)
 {
     CHECK(gpio_set_level(dev->sclk_pin, 1));
-    ets_delay_us(1);
+    esp_rom_delay_us(1);
     CHECK(gpio_set_level(dev->sclk_pin, 0));
-    ets_delay_us(1);
+    esp_rom_delay_us(1);
     return ESP_OK;
 }
 

@@ -115,7 +115,7 @@ static esp_err_t dev_sleep(i2c_dev_t *dev, bool sleep)
 {
     CHECK(update_reg(dev, REG_MODE1, MODE1_SLEEP, sleep ? MODE1_SLEEP : 0));
     if (!sleep)
-        ets_delay_us(WAKEUP_DELAY_US);
+        esp_rom_delay_us(WAKEUP_DELAY_US);
 
     return ESP_OK;
 }
@@ -182,7 +182,7 @@ esp_err_t pca9685_restart(i2c_dev_t *dev)
     if (mode & MODE1_RESTART)
     {
         I2C_DEV_CHECK(dev, write_reg(dev, REG_MODE1, mode & ~MODE1_SLEEP));
-        ets_delay_us(WAKEUP_DELAY_US);
+        esp_rom_delay_us(WAKEUP_DELAY_US);
     }
     I2C_DEV_CHECK(dev, write_reg(dev, REG_MODE1, (mode & ~MODE1_SLEEP) | MODE1_RESTART));
     I2C_DEV_GIVE_MUTEX(dev);

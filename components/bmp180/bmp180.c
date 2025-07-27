@@ -90,7 +90,7 @@ static esp_err_t bmp180_get_uncompensated_temperature(i2c_dev_t *dev, int32_t *u
     CHECK(bmp180_start_measurement(dev, BMP180_MEASURE_TEMP));
 
     // Wait 5ms, datasheet states 4.5ms
-    ets_delay_us(5000);
+    esp_rom_delay_us(5000);
 
     int16_t v;
     CHECK(bmp180_read_reg_16(dev, BMP180_OUT_MSB_REG, &v));
@@ -115,7 +115,7 @@ static esp_err_t bmp180_get_uncompensated_pressure(i2c_dev_t *dev, bmp180_mode_t
     // Write Start Code into reg 0xF4
     CHECK(bmp180_start_measurement(dev, BMP180_MEASURE_PRESS | (oss << 6)));
 
-    ets_delay_us(us);
+    esp_rom_delay_us(us);
 
     uint8_t d[] = { 0, 0, 0 };
     uint8_t reg = BMP180_OUT_MSB_REG;

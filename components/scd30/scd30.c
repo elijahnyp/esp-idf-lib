@@ -153,7 +153,7 @@ static esp_err_t execute_cmd(i2c_dev_t *dev, uint16_t cmd, uint32_t timeout_ms,
         if (timeout_ms > 10)
             vTaskDelay(pdMS_TO_TICKS(timeout_ms));
         else
-            ets_delay_us(timeout_ms * 1000);
+            esp_rom_delay_us(timeout_ms * 1000);
     }
     if (in_data && in_words)
         I2C_DEV_CHECK(dev, read_resp(dev, in_data, in_words));

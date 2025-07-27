@@ -240,7 +240,7 @@ esp_err_t led_strip_flush(led_strip_t *strip)
     CHECK_ARG(strip && strip->buf);
 
     CHECK(rmt_wait_tx_done(strip->channel, pdMS_TO_TICKS(CONFIG_LED_STRIP_FLUSH_TIMEOUT)));
-    ets_delay_us(50);
+    esp_rom_delay_us(50);
     return rmt_write_sample(strip->channel, strip->buf,
                             strip->length * COLOR_SIZE(strip), false);
 }
